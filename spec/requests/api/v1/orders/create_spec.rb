@@ -37,4 +37,3 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
     end
   end
 end
-
