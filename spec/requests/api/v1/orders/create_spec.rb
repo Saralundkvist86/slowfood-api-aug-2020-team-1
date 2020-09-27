@@ -1,23 +1,23 @@
 RSpec.describe 'POST /api/v1/orders', type: :request do
-  let!(:hamburger) {
+  let!(:hamburger) do
     create(:product, name: 'Hamburger')
-  }
+  end
 
-  let!(:product_that_wont_be_added_to_the_order) {
+  let!(:product_that_wont_be_added_to_the_order) do
     create(:product, name: 'Bigos')
-  } 
+  end
 
   let!(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
-  let(:headers) { { HTTP_ACCEPT: 'application/json'}.merge!(credentials) }
+  let(:headers) { { HTTP_ACCEPT: 'application/json' }.merge!(credentials) }
 
   describe 'successfully' do
     before do
-      post '/api/v1/orders', 
-      params: { 
-        product: hamburger.id 
-      },
-      headers: headers
+      post '/api/v1/orders',
+           params: {
+             product: hamburger.id
+           },
+           headers: headers
     end
 
     it 'should respond with 200 status' do
@@ -25,7 +25,7 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
     end
 
     it 'should respond with success message' do
-      expect(response_json["message"]).to eq "Item has been added to your order"
+      expect(response_json['message']).to eq 'Item has been added to your order'
     end
 
     it 'should respond with order_id' do
@@ -33,7 +33,7 @@ RSpec.describe 'POST /api/v1/orders', type: :request do
     end
 
     it 'order should have correct product in it' do
-      expect(Order.last.order_items.first["product_id"]).to eq hamburger.id 
+      expect(Order.last.order_items.first['product_id']).to eq hamburger.id
     end
   end
 end
