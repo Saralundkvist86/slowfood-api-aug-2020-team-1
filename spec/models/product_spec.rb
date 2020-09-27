@@ -8,7 +8,7 @@ RSpec.describe Product, type: :model do
   describe 'Database table' do
     it { is_expected.to have_db_column :name }
     it { is_expected.to have_db_column :price }
-    it { is_expected.to have_db_column :description }
+
   end
 
   describe 'Validations' do
